@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sagitarius A
-  m_Shader: {fileID: 4800000, guid: 693eb181e216fe646b6683255d7e1be7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 09798164edbb1684aa2a75964cbaf375, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -33,8 +33,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistortionStrength: 0.1
-    - _EventHorizon: 2.49
+    - _DistortionStrength: 1
+    - _EventHorizon: 0
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

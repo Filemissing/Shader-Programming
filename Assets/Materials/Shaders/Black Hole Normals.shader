@@ -1,4 +1,4 @@
-Shader "Unlit/Black Hole"
+Shader "Unlit/Black Hole Normals"
 {
     Properties
     {
@@ -8,7 +8,6 @@ Shader "Unlit/Black Hole"
     SubShader
     {
         Tags { "Queue"="Transparent" "RenderType"="Transparent" }
-        GrabPass { }
         LOD 100
 
         Pass
@@ -20,9 +19,11 @@ Shader "Unlit/Black Hole"
             #include "UnityCG.cginc"
 
             // Properties
-            sampler2D _GrabTexture;
+            sampler2D _CameraOpaqueTexture;
             float _EventHorizon;
             float _DistortionStrength;
+
+            float PI = 3.14159265358979323846264338327950288419716939937510;
 
             struct input
             {
@@ -36,7 +37,6 @@ Shader "Unlit/Black Hole"
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 float3 worldPos : TEXCOORD1;
-                float2 screenUV : TEXCOORD2;
                 float4 normal : NORMAL;
             };
 
@@ -47,11 +47,8 @@ Shader "Unlit/Black Hole"
                 OUT.pos = UnityObjectToClipPos(IN.vertex);
                 OUT.uv = IN.uv;
                 OUT.worldPos = mul(unity_ObjectToWorld, IN.vertex).xyz; 
-                
-                float4 screenPos = ComputeScreenPos(OUT.pos);
-                OUT.screenUV = screenPos.xy / screenPos.w;
 
-                OUT.normal = IN.normal;
+                OUT.normal = mul(unity_ObjectToWorld, IN.normal); 
 
                 return OUT;
             }
@@ -60,25 +57,11 @@ Shader "Unlit/Black Hole"
             {   
                 fixed4 color = fixed4(1, 1, 1, 1);
 
-                float3 center = mul(unity_ObjectToWorld, float4(0, 0, 0, 1));
-                float distanceToCenter = distance(center, IN.worldPos.xyz);
+                float3 viewDirection = normalize(IN.worldPos - _WorldSpaceCameraPos);
 
-                // Normalize distance
-                float normalizedDist = saturate((distanceToCenter - _EventHorizon) / _EventHorizon);
-
-                // Calculate distortion amount
-                float2 distortion = (IN.screenUV - 0.5) * (_DistortionStrength * (1.0 - normalizedDist));
-
-                // Apply distortion to screen UVs
-                float2 distortedUV = IN.screenUV + distortion;
-
-                // Sample the background texture
-                fixed4 col = tex2D(_GrabTexture, distortedUV);
-
-                if(distanceToCenter < _EventHorizon) col = fixed4(0, 0, 0, 1);
-
+                float angle = acos(dot(IN.normal, viewDirection) / (length(IN.normal) * length(viewDirection)));
                 
-                return col;
+                return float4(angle, angle, angle, 1);
             }
             ENDCG
         }

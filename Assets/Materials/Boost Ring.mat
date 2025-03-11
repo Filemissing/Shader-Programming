@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crystal_Blue
-  m_Shader: {fileID: 4800000, guid: ec1a1c9e5b184c147b86284011366741, type: 3}
+  m_Name: Boost Ring
+  m_Shader: {fileID: 4800000, guid: 1523c431a665cec47b46354f01acc010, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -19,22 +19,23 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: _SubtractionModifier
+  m_LockedProperties: :m_CustomRenderQueue
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _EmissionMap:
+        m_Texture: {fileID: 2800000, guid: f3612a63f4837534280ea4fdbbad7f9f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Glossiness: 0.544
-    - _Intensty: 4.11
-    - _Metallic: 0
-    - _MultiplicationModifier: 5
-    - _SubtractionModifier: 1.5
+    - _EmissionCutoff: 0.9
     m_Colors:
-    - _Color: {r: 0, g: 0.73298424, b: 4, a: 1}
+    - _EmissionColor: {r: 0, g: 17.351297, b: 47.937256, a: 1}
+    - _StandardColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

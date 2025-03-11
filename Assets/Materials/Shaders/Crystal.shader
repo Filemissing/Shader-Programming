@@ -46,7 +46,7 @@ Shader "Custom/Crystal"
 
                 OUT.vertex = UnityObjectToClipPos(IN.position);
                 OUT.worldPos = mul(unity_ObjectToWorld, IN.position);
-                OUT.normal = IN.normal;
+                OUT.normal = IN.normal; // convert to world space??
                 OUT.uv = IN.uv;
 
                 return OUT;
@@ -57,10 +57,10 @@ Shader "Custom/Crystal"
                 // Get world space view direction (camera to fragment)
                 float3 viewDir = normalize(IN.worldPos - _WorldSpaceCameraPos);
 
-                // Compute cross product
+                // Compute dot product
                 float3 crossProduct = dot(IN.normal, viewDir);
 
-                // Compute length of cross product
+                // Compute length of dot product
                 float intensity = pow(2, (length(crossProduct) - _SubtractionModifier) * _MultiplicationModifier);
 
                 float4 c = float4(_Color.rgb * intensity, _Color.a);

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crystal_Blue
+  m_Name: Crystal_Purple
   m_Shader: {fileID: 4800000, guid: ec1a1c9e5b184c147b86284011366741, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -19,7 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: _SubtractionModifier
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -35,6 +35,6 @@ Material:
     - _MultiplicationModifier: 5
     - _SubtractionModifier: 1.5
     m_Colors:
-    - _Color: {r: 0, g: 0.73298424, b: 4, a: 1}
+    - _Color: {r: 1.2705883, g: 0.2980389, b: 2.9960785, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
