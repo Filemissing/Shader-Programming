@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Galaxy Sea
-  m_Shader: {fileID: 4800000, guid: 8d9e27939a30d5c429dbcab31853bc9c, type: 3}
+  m_Name: Gerstner Waves
+  m_Shader: {fileID: 4800000, guid: 81892d03602b80f4c9cbd083f690723c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -25,21 +25,14 @@ Material:
     m_TexEnvs:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 07c7002d2e920d44d859c21e27fd6f94, type: 3}
-        m_Scale: {x: 10, y: 10}
-        m_Offset: {x: 0, y: 0}
-    - _Noise:
-        m_Texture: {fileID: 2800000, guid: 04c80f2127cb8974489447f068e8ab77, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorIntensity: 4
-    - _HeightIntensity: 15
-    - _Speed: 5
+    - _Speed: 0
     - _Steepness: 0.5
-    - _Wavelength: 75
+    - _Wavelength: 86.26
     m_Colors:
-    - _Color: {r: 0.16629584, g: 0.65980756, b: 0.9528302, a: 1}
-    - _ScrollSpeed: {r: 1, g: 1, b: 0, a: 0}
+    - _Color: {r: 0.2216981, g: 0.54040724, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

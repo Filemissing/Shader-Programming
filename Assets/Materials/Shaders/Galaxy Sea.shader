@@ -2,11 +2,10 @@ Shader "Unlit/Galaxy Sea"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-        _Noise ("Noise Heightmap", 2D) = "white" {}
-        _ScrollSpeed ("ScrollSpeed", Vector) = (1, 1, 0, 0)
-        _HeightIntensity ("Heightmap Intensity", float) = 1
-        _ColorIntensity ("Color Intensity", float) = 3
+        _Color ("Color", Color) = (0.0, 0.5, 0.8, 1.0)
+        _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _Speed ("Speed", Float) = 1.0
+        _WavesNum ("Number of Waves", float) = 4.0
     }
     SubShader
     {
@@ -24,10 +23,13 @@ Shader "Unlit/Galaxy Sea"
             // Properties
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            sampler2D _Noise;
-            float2 ScrollSpeed;
-            float _HeightIntensity;
-            float _ColorIntensity;
+            fixed4 _Color;
+            float _Speed;
+            float _Gravity = 9.8;
+            float _WavesNum;
+
+            // Wave settings (adjust NUM_WAVES for more detail)
+            float4 _WaveData[16]; // (dirX, dirZ, wavelength, steepness)
 
             struct appdata
             {
@@ -38,31 +40,57 @@ Shader "Unlit/Galaxy Sea"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                float2 scrolledUV : TEXCOORD1;
                 float4 vertex : SV_POSITION;
             };
 
+            // Gerstner Wave Function
+            float3 GerstnerWave(float3 worldPos, float2 direction, float wavelength, float steepness, float time)
+            {
+                float k = 2.0 * UNITY_PI / wavelength;  // Wave number
+                float c = sqrt(_Gravity / k);           // Wave speed
+                float a = steepness / k;                // Amplitude
+
+                // Compute phase, moving in wave direction over time
+                float phase = k * (dot(worldPos.xz, direction) - time * _Speed);
+
+                // Apply displacement
+                float3 displacedPos = worldPos;
+                displacedPos.x += direction.x * a * cos(phase);
+                displacedPos.z += direction.y * a * cos(phase);
+                displacedPos.y += a * sin(phase);
+
+                return displacedPos;
+            }
+
+            // Vertex Shader
             v2f vert (appdata v)
             {
                 v2f o;
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.scrolledUV = v.uv + float2(.1, .1) * _Time.y;
 
-                float4 noiseSample = tex2Dlod(_Noise, float4(o.scrolledUV, 0, 0));
-                float heightOffset = noiseSample.r * _HeightIntensity;
+                float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
 
-                float4 worldSpacePos = mul(unity_ObjectToWorld, v.vertex);
-                worldSpacePos.y += heightOffset;
-                float4 newPos = mul(unity_WorldToObject, worldSpacePos);
+                // Apply multiple waves
+                for (int i = 0; i < _WavesNum; i++)
+                {
+                    float2 dir = normalize(_WaveData[i].xy);
+                    float wavelength = _WaveData[i].z;
+                    float steepness = _WaveData[i].w;
 
-                o.vertex = UnityObjectToClipPos(newPos);
+                    worldPos = GerstnerWave(worldPos, dir, wavelength, steepness, _Time.y);
+                }
+
+                // Transform back to object space
+                float3 newObjectPos = mul(unity_WorldToObject, float4(worldPos, 1.0));
+                o.vertex = UnityObjectToClipPos(newObjectPos);
+
                 return o;
             }
 
+            // Fragment Shader
             float4 frag (v2f i) : SV_Target
             {
-                float4 col = tex2D(_MainTex, i.uv) * _ColorIntensity;
-                return col;
+                return tex2D(_MainTex, i.uv);
             }
             ENDCG
         }
