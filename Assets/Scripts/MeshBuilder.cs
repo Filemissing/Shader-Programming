@@ -71,6 +71,7 @@ public class MeshBuilder {
 	/// <param name="shouldRecalculateNormals">If set to <c>true</c> should recalculate normals.</param>
 	public Mesh CreateMesh(bool shouldRecalculateNormals = true, bool shouldRecalculateTangents = true) {
 		Mesh mesh = new Mesh();
+		mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 		mesh.vertices = _vertices.ToArray();
 		mesh.uv = _uvs.ToArray();
 		mesh.subMeshCount = 1;
