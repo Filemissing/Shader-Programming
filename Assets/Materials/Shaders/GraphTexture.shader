@@ -10,7 +10,7 @@ Shader "Unlit/GraphTexture"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags {  "Queue"="Background" "RenderType"="Background" }
         LOD 100
 
         Pass

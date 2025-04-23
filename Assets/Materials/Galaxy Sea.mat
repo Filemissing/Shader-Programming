@@ -35,11 +35,15 @@ Material:
     m_Floats:
     - _ColorIntensity: 4
     - _HeightIntensity: 15
+    - _Metalic: 0.1
+    - _Smoothness: 0.8
     - _Speed: 5
     - _Steepness: 0.5
     - _Wavelength: 75
+    - _WavesNum: 4
     m_Colors:
     - _Color: {r: 0.16629584, g: 0.65980756, b: 0.9528302, a: 1}
+    - _GlobalLight: {r: 1, g: 1, b: 1, a: 0.101960786}
     - _ScrollSpeed: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

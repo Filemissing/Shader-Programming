@@ -74,9 +74,9 @@ public class MeshBuilder {
 		mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 		mesh.vertices = _vertices.ToArray();
 		mesh.uv = _uvs.ToArray();
-		mesh.subMeshCount = 1;
+		mesh.subMeshCount = _triangles.Count;
 		for (int i = 0; i<_triangles.Count; i++) {
-			mesh.SetTriangles(_triangles[i].ToArray(), 0);
+			mesh.SetTriangles(_triangles[i].ToArray(), i);
 		}
 		if (shouldRecalculateNormals == true) {
 			mesh.RecalculateNormals();
