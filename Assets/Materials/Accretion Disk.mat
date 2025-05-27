@@ -34,7 +34,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Cutoff: 0.189
-    - _Radius: 107.4
+    - _Radius: 139.48
     - _Speed: 0.2
     m_Colors:
     - _Color: {r: 8, g: 0.40784314, b: 0, a: 1}
