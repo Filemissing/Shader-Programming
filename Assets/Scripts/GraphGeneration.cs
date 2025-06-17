@@ -13,6 +13,9 @@ public class GraphGeneration : MonoBehaviour
         material = meshRenderer.material;
     }
 
+    //public int Steps;
+    //public float Thickness;
+
     public Vector2Int size;
     public Color baseColor;
     public Color lineColor;
@@ -40,19 +43,22 @@ public class GraphGeneration : MonoBehaviour
 
                 Vector2 trange = new Vector2(0, 2);
 
-                // float stepSize = (trange.y - trange.x) / _Steps;
+                //bool isOnLine = false;
+                //float stepSize = (trange.y - trange.x) / Steps;
+                //for (int j = 0; j < Steps; j++)
+                //{
+                //    float t = trange.x + j * stepSize;
+                //    float2 result = Formula(t, animationValue);
 
-                // for (int j = 0; j < _Steps; j++) 
-                // {
-                //     float t = trange.x + j * stepSize;
-                //     float2 result = formula(t, _Time.y * _Speed);
+                //    float dist = Vector2.Distance(uv, result);
+                //    if (dist < Thickness)
+                //    {
+                //        isOnLine = true;
+                //        break;
+                //    }
+                //}
 
-                //     float dist = distance(i.uv, result);
-                //     if (dist < _Thickness) {
-                //         isOnLine = 1;
-                //         break;
-                //     }
-                // }
+                //if (isOnLine) pixels[x, y] = lineColor;
 
                 float s = 2 * uv.x - 1;
                 float angle1 = Mathf.Asin(s);
